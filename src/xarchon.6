@@ -1,0 +1,468 @@
+.TH xarchon 6 "July 1999" "X ARCHON"
+.IX xarchon
+.SH NAME
+
+xarchon - ARCHON clone for X11
+
+.SH SYNOPSIS
+
+.B xarchon
+
+.SH DESCRIPTION
+
+In this game, the Light Side and Dark Side fight over control of
+a chess-like board.  Each side is composed of 18 fantastic creatures
+of myth and legend, which are represented by images (or icons).
+While not identical, the opposing sides are balanced in strength.
+
+This manual page is composed of two main parts.  The first one
+describes the rules of X ARCHON.  The second part describes
+how to interact with the graphical user interface.
+
+.SH THE RULES
+
+There are two modes of game play:
+.B board
+and
+.B field
+mode.  When in board
+mode, you select which creature (or piece) you want to move, and where
+to move it to, in a way somewhat similiar to chess.
+
+However, in X ARCHON, merely moving a creature onto a square occupied
+by a foe does not win the battle.  At this point, game play changes
+to field mode, and a battle begins.  The surviving creature is returned
+to the board, in control of the disputed square.
+
+There are two ways to win the game.  The first, easier way is to have
+creatures of your side occupying the five power points (see section
+SQUARES for more information).
+
+The second, more difficult way is by leaving your opponent no legal
+move to make.  This can by killing all their creatures, or imprisoning
+(see section SPELLS for more information) their last surviving creature.
+
+.SH BOARD PLAY
+
+The board is composed of 9 by 9 squares.  Not all squares look the same.
+The appearance of a square tells about its nature.
+
+Game play in board mode is turn-based:  while one player is making
+a move, the other side waits.  In each turn, a player can either move
+a single creature from one square to another (see the section on
+movement) or cast a spell (see the section on spells).
+
+.SS SQUARES
+
+.B Light, dark, and luminance squares:
+Light squares are always light, dark squares are always dark, but
+the shade of luminance squares slowly changes from light to dark
+and back to light, in accordance with the luminosity cycle.
+
+It is preferable for a creature to rest on a square having the
+color of its side;  see the section on field play for more
+information.
+
+The lower right corner of the board display shows some useful
+information about the luminosity cycle.  The
+.B
+direction ("+" or "-")
+indicator shows the direction of the luminosity cycle.  A +
+indicates the cycle grows lighte,  a - indicates it grows
+darker.  The
+.B
+side (L or D)
+indicator tells you which side benefits from resting on a
+luminance square at that time:  L for light, and D for dark.
+And finally, the
+.B
+state (digits 1 through 6)
+indicator discloses the exact value of the luminosity cycle,
+with 1 indicating the lightest possible luminosity, and 6
+indicating the darkest.
+
+.B Power points:
+Five squares on the board have special markings;  a creature
+resting on a square that is a power point heals twice as fast as
+it would on any other kind of square.  Such a creature is also
+immune to magical attacks;  see the section on spells for more
+information.
+
+.SS MOVEMENT
+
+To select a creature, use your controls to move the cursor to
+the requested creature, then press fire to select it.  Then use
+your controls to move the creature to where you want it to go,
+and press fire again to complete the move.
+
+A creature may travel only up to a certain distance per turn, and
+the move you make will be restricted to this limit.  Not all
+creatures have the same limit;  some can only move up to 3 squares
+away from their starting position, while others may move as far
+as 5 squares.
+
+Creatures belong to either of two classes.  If the creature you
+select is of the
+.B
+ground
+class, you cannot move it through squares occupied by other
+creatures at all (although you may move it
+.B into
+a square occupied by a foe).
+.B Fly
+creatures, on the other hand, are not limited in this way,
+and may move through any square, wheather it is occupied or not.
+
+Whatever the class of the creature is--ground or fly--it can only
+end its move in a square that is either empty, or occupied by
+a foe.  In the latter case, the game play will change to field mode.
+
+.SS SPELLS
+
+Two creatures on the board posses the ability to cast magic spells.
+These creatures are the mages: the
+.B
+light wizard
+and the
+.B
+dark sorceress.
+Spells are cast in place of a regular movement.  This means that
+in a single, a mage can move, or he or she can cast a spell, but
+never both things at once.
+
+There are seven different kinds of spells.  As the game begins, all
+of the seven spells are available to each mage.  However, once a
+spell is cast by a mage, that particular mage cannot cast that 
+particular spell again throughout the game.
+
+.B
+Teleport:
+Moves a creature of your choice from one square to any other
+square that you select, regardless of the distance between the
+two squares.  You can only move unimprisoned creatures on your
+own side, and neither the source nor the destination square
+may be a power point.
+
+.B
+Heal:
+Instantly and completely heal a creature of your choice.  Its
+health is restored to the level it was at when the game started.
+
+.B
+Shift Time:
+When the luminosity cycle is at its lightest or darkest peak,
+it is abruptly shifted to the opposite side.  Otherwise, this
+spell merely changes the direction of the luminosity cycle.
+
+.B
+Exchange:
+Swap places between any two creatures you select, regardless of
+the distance between them.  There is no restriction on the side
+of either creature.  However, neither creature can be imprisoned
+or on a power point.
+
+.B
+Summon Elemental:
+Bring forth a spirit of one of the four elements of nature (air,
+earth, fire or water) to battle an opposing creature of your choice.
+The elemental and the opposing creature will engage in a battle as
+usual.  However, once the battle is over, the elemental
+vanishes--even if it won. You can not choose which elemental will
+appear, and you cannot use an elemental for anything other than
+engaging battle. You also cannot attack a creature resting on a
+power point.
+
+.B
+Revive:
+Resurrect and bring back to the board a single creature, per your
+selection, that was previously lost in battle is resurrected.
+The creature is also healed, but that does not cost you a heal
+spell.  The creature will be placed besides your mage, so there
+must be at least one square vacant around the mage.
+
+.B
+Imprison:
+Temporarily bind an opposing creature of your choice to the square
+it is resting on at the time of the spell.  The creature will be
+able to defend itself during battle;  but on the board, it won't be
+able to leave its square.  The effect of imprisonment wears off
+for light side creatures when the luminosity cycle is at its
+lightest peak;  similiarly, dark creatures will become free when
+the cycle is at its darkest peak.
+
+.B
+Cease conjuring:
+This is not a spell, but merely a way to tell the game you have
+changed your mind, and don't really want to cast any spells at
+this time.  Since it's not really a spell, it never becomes
+unavailable.
+
+.SH FIELD PLAY
+
+By turn end, if any two creatures rest on the same square
+(by result of either plain movement or some spell), the game
+goes into field mode, and a battle begins between the two
+creatures.
+
+This battle is fought entirely within the square the two opposing
+sides are interested in.  However, since the squares on the board
+are pretty small and it would be hard to see anything, the single
+square is expanded to the size of the display.
+
+There are a few basic rules in field play, and these will be
+described next.
+
+.SS MOVEMENT AND ATTACK
+
+The game is not turn-based in field mode; rather, any action
+either of the creatures makes--such as to move somewhere, or
+attack in some direction--is instantly performed.
+
+Movement is possible in all 8 surrounding directions.
+Most creatures move at the same speed, however a few move
+somewhat slower.  To move, press a direction key
+to indicate where you want your creature to go.
+
+Attacking is also possible in all 8 sorrunding directions.
+There are three basic kinds of attacks, which are
+detailed below.  To attack, hold down the fire key, and
+press a direction key to indicate where you want your
+creature to attack.
+
+.B
+Short-range:
+your creature uses a typical "cold" weapon to hurt its opponent.
+For such an attack to have any meaning, the two creatures must
+be adjacent.  A creature attacked in this way loses some of its
+health, and becomes frozen for a short period of time.
+
+.B
+Circular:
+your creature causes a circular area of some small radius
+around it to become harmful to the opponent.  If the opponent
+enters this area, it will gradually lose health until the
+attack is complete.  It will not become frozen.
+
+.B
+Missile:
+your creature fires a shot, preferably in the general direction
+of your opponent.  There is no need for the two creatures to
+be close to one another.  Not all missiles are the same;  some
+are faster, while others are more damaging.  A creature attacked
+by a shot loses some of its health, and becomes frozen for
+a short period of time.
+
+Once a creature attacks, it cannot instantly attack again.  A
+short period of "reload" time is required.  (Even in the case
+of a "cold" weapons such as a sword or a rock, your creature
+cannot repeatedly attack without a little rest in between.)
+
+The instant you attack, a red bar appears on your side of the
+screen.  This bar indicates how long you must wait before your
+creature can attack again.  As time passes, this bar decreases
+in size.  Once the bar disappears, you may attack again.
+
+.SS HEALTH
+
+All creatures that are alive are at some level of health.  The
+exact level of health is indicated by the outtermost bar on
+each side of the screen.  The goal of a creature is to cause
+enough damage to its opponent, such that the opponent's health
+becomes zero, and it is removed from the board.
+
+It is important to note that the winning creature will not be
+healed at all the time it returns to the board.  Thus, even the
+strongest of creatures may eventually be defeated by a horde
+of attackers.
+
+But the health of a creature at the beginning of a battle may
+be determined by more than just its own health:  of the two
+creatures, one of them receives a bonus, depending on the
+color of the square.  Light squares will boost the initial health
+of light creatures;  similiarly, dark squares will boost dark
+creatures.
+
+In this bonus calculation, squares that are always light or
+always dark give the most bonus, while squares that participate
+in the luminosity cycle give a bonus that is proportional to
+how close the square is to the peak of the cycle.  In other
+words, light creatures would benefit the most from luminance
+squares when the cycle is at is lightest peak;  and dark
+creatures would benefit the most when the cycle is at its
+darkest peak.
+
+.SS ROCKS
+
+Inside the square over which you and your opponent are fighting
+are rocks.  These rocks are visible only in the field screen.
+
+Much like the luminance squares on the board, the rocks participate
+in a luminosity cycle:  each slowly changes from light to dark
+and back to light.  Most of the time, the rocks are solid.
+However, when the luminance approaches the lightest peak of the
+cycle, it becomes possible to slowly walk or shoot past it.
+
+.SH THE GRAPHICAL USER INTERFACE
+
+The graphical user interface is your means of telling the progam
+exactly how you want to play.  Using the GUI, you can:
+
+- define players, select two players to play on either side;
+- select a graphical theme (although currently there is only
+one theme to choose from);
+- start and end games;
+- and toggle sound.
+
+.SS DEFINING PLAYERS
+
+the program has a concept of "players."  A player is merely
+a collection of configuration choices.  For example, one
+configuration choice is who plays for this player (a human
+at the console, the computer, or perhaps it is played
+through the network).
+
+Use the menu option Define Players in the Settings menu
+to open the Define Players dialog window.  In this window,
+you may insert, delete or update players.
+
+Insert and delete operations are pretty much self-explanatory,
+as there are two buttons that will take perform these tasks.
+
+Updating means changing a player's name, or its kind, or
+specifically configuring it.  The former two are done simply
+by typing a into the name entry box and selecting one of
+the "kind" radio buttons, respectively.  The latter is
+done by clicking on the configuration button, which brings
+a specific configuration window.  The content of this
+window is described below.
+
+Once you have configured the players as needed, click on
+the OK button to actually make changes.  Alternatively,
+if you change your mind, clicking on the Cancel button
+will undo all of these changes.
+
+.B
+Human configuration:
+The human configuration window lets you set the keyboard/joystick/mouse
+controls for the player.  You may configure different controls
+for the light and dark side of the same player, so you can later
+choose it to play for both sides. (In other words, you don't have
+to define two human players for a two-player game.)  Alternatively,
+you may define controls once for both sides.
+
+The "Side" option menu allows you to decide which side
+(light, dark or both) is going to be affected by the next
+keyboard binding you make.  The "Action" option menu
+selects which action you are going to bind, and finally,
+clicking on the "Key" button lets you type in the
+key you want bound to the selected action for the selected
+side (or sides).
+
+The last option menu is used to say if a joystick or mouse may
+be used in addition to the keyboard controls.
+
+.B
+Computer configuration:
+The computer configuration window is pretty simple.
+Radio buttons let you select a difficulty level for
+the computer:  easy, medium or hard.
+
+There is a checkbox which lets you specify that you want
+the old, rule-based computer board logic.  In effect,
+enabling this checkbox means this computer player will play
+rather poorly on the board.  (This checkbox has no effect
+on the way the computer plays in field mode.)
+
+.B
+Network configuration:
+The network configuration window lets configure the
+game for playing over the network.  The network
+model dictates that the light side is always the
+"server", which waits for a connection to be made,
+and dark side is the "client", which makes the
+initial connection.
+
+Therefore, the IP address that is configurable in
+this window is only meaningful for players that
+will be selected to play the dark side, as they
+would need to know the address to connect to.
+
+The port number, however, has to be filled in
+by both sides.  Both sides must also set the exact
+same number for the connection to be successful.
+
+.SS SELECTING PLAYERS
+
+Once you are comfortable with your players, use the
+menu option Select Players in the Settings menu
+to open the Select Players dialog window.
+
+This window lets you select which player is going to
+play for the light side, and which is going to play
+for the dark side.
+
+You may also choose which side goes first using
+the two radio buttons provided for this purpose.
+Please note that the network model dictates that
+the light side always goes first, and so these
+radio buttons have no effect on networked games.
+
+Click OK to accept the selection you've made, or
+Cancel to undo any changes you may have made.
+
+.SS THE GAME
+
+Use the menu option New in the Game menu to begin a
+new game.  If no network players have been selected
+to play for either side, the game will immediately
+begin.  Otherwise, the light side will enter "server"
+mode and wait for the "client"--the dark side--to
+connect to it.  Only when a connection has been made
+will the game actually start.
+
+The user interface disappears while playing the game.
+To return to it, press the Escape key.  The Settings
+menu will then be disabled, preventing you from
+making any modifications to the players or graphics
+while a game is active.  However, you will be able
+to stop the game in progress, unpause it, or exit the
+progarm altogether, using the menu options Stop, Unpause
+and Exit, respectively, of the Game menu.
+
+Another way to return to the GUI while playing the
+game is the F12 key, which also stops the current game.
+It is equivalent to pressing Escape and then selecting
+the menu option Stop from the Game menu.
+
+Note that pausing a network game is not possible,
+and so the only way to return to the GUI is using F12,
+which also ends the game.
+
+Also note that the game does not automatically return
+to the GUI after either side has won.  Instead, it
+leaves you starting at the board.  Pressing Escape
+or F12 at this point will yield the same result, which
+is getting you back to the GUI.
+
+.SH AUTHOR
+Ronen Tzur <rtzur@shani.net>
+
+.SH COPYRIGHT
+Copyright (C) 1999 Ronen Tzur
+
+Based on an original game by Anne Westfall, Jon Freeman,
+and Paul Reiche III.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA

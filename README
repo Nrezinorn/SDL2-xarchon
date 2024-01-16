@@ -1,0 +1,44 @@
+X ARCHON
+
+Description:  X ARCHON, as the name implies, is a clone of the original
+(about 15-years old) ARCHON game.  And, it's for the X Window System.
+
+Platforms:  my system is a Linux/Intel;  reportedly also runs on a
+Linux/Alpha, AIX 4.3.2, Solaris 2.6, FreeBSD 4.0, and NetBSD 1.4.1.
+If anybody successfully runs it on other platforms, please let me
+know so I can write it here and be happy about it.
+
+Requirements:  X11, Xpm, GTK+, pthread libraries.
+
+Installation:  type "configure" followed by "make" followed by
+"make install".  Or read the "generic installation instructions"
+(yawn!) in the file INSTALL if you're really bored.
+
+Documentation:  after installing, type "man xarchon".
+
+Controls:  light side:  qweadzxc moves, tab fires;
+           dark  side:  numeric keypad moves, return fires.
+(Use Settings|Define Players dialog to change controls.)
+
+Home Page:  http://xarchon.seul.org
+
+Copying License:  GPL.  See the file COPYING.
+
+Author:  Ronen Tzur <rtzur@shani.net>
+
+Graphics:  Dan LaPine <d-lapine@cecer.army.mil>
+           Matt Kimball <mkimball@xmission.com>
+           Mark Shoulson <mark@kli.org>
+           Joerg Osarek <joerg@osarek.de>
+
+Sound:  Dan Hursh <hursh@sparc.isl.net>
+
+Board AI stuff:  Shai Roitman <shairoi@ibm.net>
+
+More great code by:
+        Robert Paige Rendell <rendell@cs.monash.edu.au>
+        Mike Ciul <mike@eyeballsun.org>
+
+Mike Ciul is the current maintainer of X ARCHON.
+
+-- Ronen

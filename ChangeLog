@@ -1,0 +1,474 @@
+* Version 0.55 (October 6 2001)
+
+  Mike Ciul's <mike@seul.org> changes:
+
+  - rocks don't slow weapons down anymore
+  - changed rock icons. Now the rocks change shape
+    slightly and passable rocks are broken in pieces. 
+    This is a bit of a hack because all rocks have the same bitmask for collision tests. 
+  - made animated power points flicker more subtly
+  - got rid of archon_theme.c (Rob's compiled-in xpms)
+  - big changes to field AI:
+    slowed down reaction time at low difficulty using Ronen's algorithm
+    Creatures always move relative to some target (the enemy or its weapon).
+       Movement is calculated on two axes: chase/flee and dodge/shoot
+       All directions are scored based on how they compare with the axes
+       The highest-scoring unblocked movement is chosen
+  - If a creature collides with a rock, it will be 'pushed' away from the 
+    rock's center instead of simply appearing on an adjacent cell.
+	
+  Rob Rendell's <rendell@cs.monash.edu.au> 'Done' list:
+	
+  Note that many of Rob's changes affected the rules of field play.
+  Ronen's original field rules were based on the PC version of the game, while
+  Rob's were based on the C64 version.
+	
+  - implement mouse support
+
+  - bug in imprison - if last enemy piece on board is not
+    wizard/sorceress, it didn't target the correct square.
+
+  - take out nasty hack in field.c for weapon_data, give weapons their own
+    structs in the field struct.
+
+  - fights should start with creatures offset by 1 in the y direction
+
+  - simplify field_collision to 4 comparisons.
+
+  - make iface_revive go straight to the target, rather than up to the top
+    and then down to the target.
+
+  - take out hard-coded OS timer resolution in main.c, calculate
+    dynamically.  Account for the time executing code, as well as the
+    time spent sleeping.
+
+  - add double-kills and stalemates
+
+  - immediately abort cloud weapons if their wielder dies
+
+  - undefined keys for human control were automatically hit every frame!
+
+  - Shapeshifter should take the health of an *undamaged* member of the
+    enemy's type, but with the dark side's luminance bonus.
+
+  - Elementals should be unaffected by the luminance cycle.
+
+  - From screenshots of the original Archon running on the C64 emulator,
+    measure creatures' health and weapon damage inflicted.
+
+  - From screenshots of the original Archon running on the C64 emulator,
+    the luminance cycle gives health bonuses of +0, +1, +3, +4, +6, +7
+    as the cell goes from the opposite colour to the piece's own.
+
+  - use emu to time recharging, bullet and movement speed.  Also, damage
+    rate of phoenix and banshee.
+
+  - move all the hard-coded duration and switch()-ed upon stuff into the
+    ACTOR struct.  Things like the per-frame damage of cloud weapons,
+    the fire delay, the duration of cloud and hand weapons, the speed
+    in pixels per frame of creatures and attacks
+
+  - make phoenix explosion build up in stages.
+
+  - remove whole-square rounding in field mode
+
+  - make diagonal-moving-of-ground-units a general property of diagonals
+    on the board, and remove from mouse-specific code.
+
+  - In original game, combatants could overlap.
+
+  - collision detection is too coarse.  Bitmasks
+
+  - if an image has no mask, it means it's rectangular.  Can still do
+    mask testing on the other image.
+
+  - make actor invisible if firing a ACTOR_IMMUNE_USER weapon
+
+  - ensure that field actors don't start on rocks
+
+  - have a lookup table with values multiplied by sqrt(2), used to slow
+    diagonal movement down to the same as axial.
+
+  - clouds should really be circular, rather than oval (oval in the
+    original was from the distortion of vertical distances)
+
+  - erase clouds that fall outside the field
+
+  - change layout of human configure dialog - all directions & fire at once.
+
+  - if a chosen key mapping in human configure dialog is already used,
+    clear the old mapping to null.
+
+  - wizard/sorceress teleport
+
+  - unselect unit if it finishes in its starting location
+
+  - change facing on light/dark to a separate bit
+
+  - animated board cells: have some bits that can be set which give the #
+    to & with frame_time to determine stepping
+
+* Version 0.50 (December 3, 1999)
+
+  - Fixed a small problem that would cause compilation errors for
+    systems without a joystick.
+
+  - If an imprisoned creature was defeated by another creature,
+    the winning creature would become imprisoned itself.  Fixed.
+
+  - Healing an empty cell no longer crashes the game.
+
+  - Robert Paige Rendell <rendell@cs.monash.edu.au> brought to
+    my attention the fact that the manpage is missing the
+    information regarding how to win the game.  It's there now.
+
+  - He also fixed a bug in the computer's spell selection logic
+    regarding the imprisonment of the very last opposing creature
+    (in order to win the game).
+
+  - And last but not least, he is responsible for the mouse
+    support, new in this version.
+
+* Version 0.45 (October 12, 1999)
+
+  - Fixed the bug that would occasionally cause a projectile weapon
+    to miss its target player.
+
+  - Added a new window with tips about getting started with the game.
+
+* Version 0.44 (October 6, 1999)
+
+  - Incorporated some joystick code, which was sent to me by
+    Eric Sharkey <sharkey@ale.physics.sunysb.edu>.
+
+* Version 0.43 (October 25, 1999)
+
+  - Replaced the usage of "find -printf" with that of "ls -l | cut".
+    Should be a lot more portable.
+
+  - Shai updated the scores for the board computer, so it now
+    plays better on the board (field play is the same as before).
+
+* Version 0.42 (October 11, 1999)
+
+  - New banshee graphics by Joerg, and he also scaled down the
+    size of the basilisk a little bit.
+
+  - With the intention of getting rid of the last few pieces of
+    the old graphics, I copied the unicorn and golem into the
+    manticore and troll, respectively (though I changed the
+    colors a bit).
+
+* Version 0.41 (October 9, 1999)
+
+  - Fixed a bug in the way rocks were handled.
+
+  - Dan sent me a fix for the sound code, which should make the
+    segfault that some people were experiencing go away.
+
+  - Shai sent me some improved AI code.
+
+  - Daniel Burrows <Daniel_Burrows@brown.edu> sent me a patch,
+    fixing the C++ compilation problems some people were having.
+
+* Version 0.40 (October 5, 1999)
+
+  - Made the logo screen reappear when the game is paused or has ended.
+
+  - Shai Roitman <shairoi@ibm.net> sent me AI code for the board.
+    This makes the computer play a lot better on the board.
+
+  - Now keeping a little bit more statistics (for the AI board logic).
+
+  - Dan Hursh <hursh@sparc.isl.net> sent me some sound stuff
+    (code and data).
+
+  - In networked games, the server sends the random number seed to
+    the client, instead of both of them initializing it to 0.
+
+  - Also fixed a bug in the client-side networking code, which caused
+    the error "sendto: invalid argument" on some systems.
+
+  - If pthreads is missing then game will still compile, only without
+    networking support.  There is also a --disable-network
+    configuration option to force exclusion of networking code.
+
+  - Added some more rules to the computer field player, so now the
+    hard skill level is harder, and the medium skill level is like
+    the hard skill level of previous versions.
+
+  - Changed the rate at which the phoenix and banshee cause damage to
+    their opponent, and also improved the collision detection logic
+    for their cloud weapon.  Hopefully, these two creatures will be
+    a bit more useful.
+
+  - Fine-grained the collision detection logic for the phoenix/banshee
+    cloud weapon, making it somewhat more useful.
+
+  - Deleting players in the Define Players window could mess up
+    your ~/.xarchon, and then the game would die, and you wouldn't
+    be able to restart it unless you deleted ~/.xarchon.  Fixed
+    this evil bug.
+
+  - With everything being slowed down, the troll and golem were moving
+    at the same speed as everybody else.  Now they're slower again.
+
+  - The slower speed could also cause some fast missiles to "pass
+    through" creatures every now and then, without hitting them.
+    This has also been fixed.
+
+  - If you stopped the game (using F12 for instance) while the field
+    epilog ("the x side wins") was displayed, and then start another
+    game, then the first battle of the new game would end before it
+    even begins.  Fixed this bug.
+
+  - Like in the original ARCHON, now when the game changes from
+    strategy to battle, the two opposing creatures slide into
+    position.  At the end of the battle, the winner slides back
+    to its position on the board.
+
+  - New basilisk graphics by Joerg Osarek <joerg@osarek.de>.
+
+* Version 0.31 (September 15, 1999)
+
+  - Fixed a few typos in the manual page.
+
+  - Fixed a bug that would allow the banshee to return to the board,
+    as the winner, even after it actually lost in battle.
+
+  - Modified the ground-unit distance-counting on the board.  Now
+    it's different than how the original ARCHON has it, but it is
+    more "correct."
+
+  - Dan has finished replacing the entire light side (original)
+    graphics with his own graphics.  Yay!
+
+  - The configure process now verifies that the find command accepts
+    the "-printf" option.  (Without it, "make install" fails.)
+
+  - Now that there are some animations (in the elementals), I found
+    that creatures would keep animating while blinkling (after
+    getting hit).  Fixed this.
+
+  - Previous version changed the format of the configuration file,
+    and if you had an ~./xarchon from an earlier version, it would
+    die.  Now I inserted a version check.
+
+  - Slightly changed the way exchange behaves, so both creatures
+    erase (row-by-row) the other creature beneath them.
+
+* Version 0.30 (September 12, 1999)
+
+  - X ARCHON has a new home page, located at http://xarchon.seul.org.
+    It is hosted by the SEUL project (http://www.seul.org), whose
+    goal is making Linux more user-friendly, and thus a better
+    competitor in the desktop market, which is now dominated by
+    The Evil One.
+
+  - New graphics for the air- and fire-elemental by
+    Mark Shoulson <mark@kli.org>.
+
+  - Changed (again) the way the shapeshifter is cloned.  The cloned
+    creature is now dimmer than its light-side opponent, and the
+    blue flashes are gone.
+
+  - Fixed a bug that would cause the game to crash if a new game
+    was started when an elemental was fighting in the field.
+
+  - Introduced short pauses while the computer is selecting a
+    spell, so the other player can tell what's going on.
+
+  - If any two adjacent non-diagonal direction keys are held down,
+    the game now interprets this as their equivalent diagonal
+    direction.  For instance, pressing 4+8 on the numeric keypad
+    is the same as pressing 7.
+
+  - In my never-ending quest for The Right Speed, this time I slowed
+    down the cursor movement on the board, and creature movement in
+    the field.
+
+  - Fixed a bug that would not let you define new human players
+    without also configuring them as computer players.
+
+  - It is now possible to immediately terminate a game in progress,
+    by pressing the F12 key.
+
+  - Added network support.  It's isn't 100% perfect, but it works.
+    The biggest flaw is that you cannot press Escape at all.
+    If you need to get back to the menu--at the cost of ending
+    the game--press F12.  Also, I only got to test the networking
+    code against "localhost", so it might fail when a real
+    network is involved.  ;-)
+
+  - Finished the man page.  Yippie!  A nice side effect is that
+    the "stuff" subdirectory is now gone.
+
+  - Finally added the about box.
+
+* Version 0.22 (August 31, 1999)
+
+  - New graphics for the dark dragon (and its fiery breath) and
+    the Shapeshifter by Matt.
+
+  - Made the computer player realize it can't cast spells if its
+    mage is imprisoned.
+
+  - Fixed numerous bugs in the computer's spell decision code.
+
+  - If the game would be over as a result of a field battle, the
+    window would turn into a gray rectangle, and you couldn't see
+    the board in its final state.  Fixed.
+
+  - It is now possible to configure a human player to use the keys
+    Return, Space and Right Control.
+
+  - Slowed down the "fast" weapons a little bit, hopefully now the
+    computer will kick everybody's ass a little less.  (It rhymes!)
+
+  - Slightly changed the way teleport behaves when you teleport one
+    creature on top of another, to make the defending creature
+    visible throughout the entire teleport.
+
+* Version 0.21 (August 29, 1999)
+
+  - Added some titles to the Settings|Select Players window, and--
+    more importantly--the ability to choose which side goes first.
+
+  - Fixed the bug that kept the window icon from being set correctly.
+
+  - Added a new module, theme.c, which handles all the theme stuff,
+    and, in particular, the GUI parts.  This code was previously in
+    actors.c, and has been moved in the hope of making actors.c more
+    platform independant.
+
+  - Fixed a typo in the description file of the `archon' theme
+    (data/archon/NAMES) which made the game die if you tried to
+    fight with the light wizard.
+
+* Version 0.2 (August 28, 1999)
+
+  - New graphics for the light wizard and light phoenix by Dan.
+
+  - Easier computers (ie, higher values for skill level) will now
+    play slower slower in the field.  In fact, the higher the skill
+    value, the slower the computer will be.
+
+  - Implemented a "configure" using autoconf and automake.  Also added
+    a "make install" target.
+
+  - Noticed that the computer scoring code did not pay attention to the
+    luminance of the square when it was considering a battle.  Fixed.
+
+  - Implemented a GTK-based GUI, using the excellent GUI builder,
+    GLADE. No more recompilation to change simple game play options!
+
+  - The game has been "theme"-ified.  (Although presently there is only
+    a single theme.)
+
+  - Introduced concept of "players."  Using the GUI, players and
+    defined as human or computer, and then configured accordingly.
+    Before starting a game, select a player for each side, and there
+    you go.
+
+  - Easier computers don't know how to shoot diagonlly anymore.  This
+    is supposed to make them easier to beat.
+
+  - Convert the computer statistics file into a text file, making it
+    machine-independant.
+
+* Version 0.1 (August 12, 1999)
+
+  - I think that GUI matters aside (and assuming there are no bugs),
+    the game is now complete.  It has all the stuff the original
+    game has, with a fully functional computer player, which kicks
+    serious butt when you play at a low enough skill level (try 2).
+
+  - Changed the format of the statistics file.  In the *really*
+    off chance that anyone has bothered to play a thousand games
+    just to the computer, well...  :-)  But on the other hand,
+    a new-format statistics file is provided.  See the README
+    about installing it.
+
+  - Changed the dark side's fire control from space to enter.
+
+  - Improved board computer logic to know about power points.
+
+  - Changed field computer logic to be a little less random.
+
+  - Teleport and exchange could be cast on imprisoned creatures;
+    this has been fixed.
+
+  - Fixed a bug in shift-time that delayed recovery of imprisoned
+    creatures in certain situations.
+
+  - Noticed that when the phoenix/banshee activate their cloud,
+    the game becomes somewhat slowed down (at least on my
+    Pentium 60 system).  To fix this I need to re-write most of
+    the stuff in canvas.c, something I don't want to do now
+    (but maybe in the future).
+
+  - Combined rock images into field background images to reduce
+    the time it takes to display a frame.
+
+  - Changed the way the shapeshifter is cloned.  Both creatures
+    are now intended to look the same, except that blue color
+    flashes periodically to remind you which one is the shapeshifter.
+
+  - Implemented spell logic in the board computer.  It isn't
+    extraordinary smart, but it gets the job done.
+
+  - Changed names for elementals.  For instance, what was previously
+    known as the "elem-air" is now known as the "air-elemental".
+
+  - With all the changes in the field play call, the range of values
+    the COMPUTER_FIELD_SKILL has grown.  The default setting is now
+    30, for a not-so-challenging computer opponent.
+
+* Version 0.08 (August 5, 1999)
+
+  - New graphics by Dan:  everything on the light side, and the goblin
+    on the dark side.
+  
+  - Swapped the keyboard controls for the light and dark sides.
+
+  - Changed the computer's field movement logic to reduce the chance
+    that it will run right into the other player's missile.
+
+  - Fixed a few bugs in the computer's board logic, and now it seems
+    to play a little less randomly.  (But you might need to play
+    against it for a while before you notice that, because it bases
+    its decisions on statistical data.)
+
+* Version 0.07 (August 3, 1999)
+
+  - Fixed all the "reply too short" situations.  (Hopefully...)
+
+  - Incorporated some board logic into the computer player, in place
+    of the old totally random behavior.  The new logic tries to make
+    moves that begin a battle, but only if the computer will win that
+    battle.  It guesses who wins by consulting statistics which are
+    gathered when any battle is over.  Thus, after enough battles take
+    place, the computer should make reasonable guesses.
+    
+    Actually, this is all in theory:  in practice, the computer still
+    seems to play in a pretty random fashion.  This will be fixed
+    in a later version.
+    
+  - Used Matt's new floor tiles.  These new tiles use far less colors
+    than his previous ones (suitable for those of us who have a
+    256-color display).
+
+  - Removed some really useless stuff from the old/ directory.
+
+* Version 0.06 (July 31, 1999)
+
+  - Fixed a bug which caused an "Alarm clock" signal to prevent the
+    game from starting.
+
+  - Introduced a system for keeping track of the average damage
+    creature [x] causes creature [y] (and vice versa) when playing
+    at skill level [n] against opponent [o].  The idea is to have
+    board computer consult this data when making a decision.
+    
+    These statistics are kept in a file called .xarchon.data which
+    lives in the user's home directory.
