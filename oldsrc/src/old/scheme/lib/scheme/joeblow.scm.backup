@@ -1,0 +1,43 @@
+
+;; callback
+
+(define (joeblow-proc mode info data)
+   (display "Inside joeblow-callback, mode is ")
+   (display mode)
+   (display " and info is ")
+   (display info)
+   (display " and data is ")
+   (display data)
+   (newline)
+   (if (eq? 
+   '#t
+)
+
+;; turn
+
+(define (joeblow-turn)
+   (display "Inside joeblow-turn")
+   (newline)
+   (#t)
+)
+
+;; notify
+
+(define (joeblow-notify command)
+   (display "Inside joeblow-notify")
+   (newline)
+   (#t)
+)
+
+;; init
+
+(define (joeblow-init side)
+   (display "Inside joeblow-init.  ")
+   (display "Would play for the ")
+   (display side)
+   (display " side.")
+   (newline)
+   '(joeblow-turn jowblow-notify)
+)
+
+()

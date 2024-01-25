@@ -1,0 +1,15 @@
+v0.1 - Get something running on modern OS
+- Convert xpm to png (or another format)
+- Combine like Images into Spritesheets
+    - document/decide spritesheet layout (ie, row 1 is for a specic side/direction/anim loop)
+- Find and rewrite "actor" class to account for spritesheets
+- Determine what we want to start off rendering on v0.1 build
+- Determine / set resolution for game *we'll probably "lock" an internal resolution and use DESKTOP_RESOLUTION.  
+- Load All sounds via SoundEngine **there is no music
+- "Code Layout"
+- code linter?
+- github status tags?
+    - look into linux ghec builds?
+
+
+Note:  When tasks are completed update ChangeLog

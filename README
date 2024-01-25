@@ -1,18 +1,14 @@
-X ARCHON
+SDL ARCHON
+==========
 
-Description:  X ARCHON, as the name implies, is a clone of the original
-(about 15-years old) ARCHON game.  And, it's for the X Window System.
+Description:  SDL ARCHON, as the name implies, is a clone of the original
+(about 39-years old) ARCHON game.  It's a revival/update to the X Arcon Project from 1999.
 
-Platforms:  my system is a Linux/Intel;  reportedly also runs on a
-Linux/Alpha, AIX 4.3.2, Solaris 2.6, FreeBSD 4.0, and NetBSD 1.4.1.
-If anybody successfully runs it on other platforms, please let me
-know so I can write it here and be happy about it.
+Platforms:  Windows/Mac/Linux +anything else we can target that can use SDL2!
 
-Requirements:  X11, Xpm, GTK+, pthread libraries.
+Requirements:  SDL2, SDL_Mixer, SDL_Image
 
-Installation:  type "configure" followed by "make" followed by
-"make install".  Or read the "generic installation instructions"
-(yawn!) in the file INSTALL if you're really bored.
+Installation:  type "make" or read the INSTALL file (Spoiler, it just says run "make")
 
 Documentation:  after installing, type "man xarchon".
 
@@ -20,9 +16,17 @@ Controls:  light side:  qweadzxc moves, tab fires;
            dark  side:  numeric keypad moves, return fires.
 (Use Settings|Define Players dialog to change controls.)
 
-Home Page:  http://xarchon.seul.org
+Home Page:  TBD 
 
 Copying License:  GPL.  See the file COPYING.
+
+SDL Archon
+==========
+Lead: Jim Gorz
+Code: Jeremy Darr
+
+Original X ARCHON Contributors
+===========
 
 Author:  Ronen Tzur <rtzur@shani.net>
 

@@ -1,9 +1,0 @@
-old canvas modules:
-
-shm prefix:  has the ability to work with shared ximages
-(regular pixmaps turned out to better)
-
-png prefix:  png stuff contributed by Matt Kimball <mkimball@xmission.com>
-
-and-or prefix:  an attempt to replace clip masks with use of GXand and GXor
-gc functions.  but it's even slower than clip masks.

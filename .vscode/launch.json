@@ -1,0 +1,61 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "Launch Debugger",
+        "program": "dummy.exe",  // this is not used but squelches parse errors
+        "request": "launch",
+        "type": "cppdbg",   // this is overridden but squelches parse errors
+        "args": [],
+        "logging": {
+            "trace":true,
+            "traceResponse":true,
+            "engineLogging":true,
+            "programOutput":true,
+         },
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "windows": {
+            "MIMode": "gdb",
+            "name": "Windows Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/SDLArchon.exe",
+            "miDebuggerPath": "${env:MINGW_BIN_PATH}/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+        },
+        "osx": {
+            "MIMode": "lldb",
+            "name": "OSX Debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/SDLArchon.bin",
+        },
+        "linux": {
+            "MIMode": "gdb",
+            "name": "Linux Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/SDLArchon.bin",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+        }
+    }
+    ]
+}
