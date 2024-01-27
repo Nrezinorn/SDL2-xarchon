@@ -10,6 +10,7 @@ v0.1 - Get something running on modern OS
 - code linter?
 - github status tags?
     - look into linux ghec builds?
+- OSX Builds use AppNBundle / no rpath issues (it just works)
 
 
 Note:  When tasks are completed update ChangeLog
