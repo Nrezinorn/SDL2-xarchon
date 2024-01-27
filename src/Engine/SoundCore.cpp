@@ -4,7 +4,7 @@
 
 cSoundCore::cSoundCore()
 {
-  	mb_Dead = true;
+  	isActive = true;
   	// What's this...  // Zero out our memory, so there's no garbage data
 	memset(&mp_Sounds,0,SOUND_SLOT_SIZE*sizeof(long));
 	memset(&mp_Songs,0,MUSIC_SLOT_SIZE*sizeof(long));
@@ -12,7 +12,7 @@ cSoundCore::cSoundCore()
 
 cSoundCore::~cSoundCore()
 {
-	if(!this->mb_Dead)
+	if(!this->isActive)
 	{
 		Shutdown();
 	}
@@ -21,7 +21,7 @@ cSoundCore::~cSoundCore()
 void cSoundCore::Initialize()
 {
 	//kill existing sound system
-	if(!this->mb_Dead)
+	if(!this->isActive)
 		Shutdown();
 	
 	if (Mix_Init(MIX_INIT_MID) < 0) 
@@ -32,10 +32,10 @@ void cSoundCore::Initialize()
 	memset(&mp_Sounds,0,SOUND_SLOT_SIZE*sizeof(long));
 
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT, 2, 2048) < 0)
-		this->mb_Dead=true;
+		this->isActive=true;
 
     //set as alive
-	this->mb_Dead = false;
+	this->isActive = false;
 
 }
 
@@ -67,7 +67,7 @@ void cSoundCore::LoadSound( const char* a_FilePath, int a_Slot, bool a_Loop ) {
 
 void cSoundCore::PlaySound(int a_SoundNumber, long a_Volume )
 {
-	if(!mb_Dead) {
+	if(!isActive) {
 		//play sound
 		Mix_PlayChannel(-1, this->mp_Sounds[a_SoundNumber],0);
 	}
@@ -75,7 +75,7 @@ void cSoundCore::PlaySound(int a_SoundNumber, long a_Volume )
 
 void cSoundCore::UnloadSound( int ai_Slot )
 {
-	if(!mb_Dead)
+	if(!isActive)
 	{
 
 		if(!this->mp_Sounds[ai_Slot])
@@ -93,7 +93,7 @@ void cSoundCore::UnloadSound( int ai_Slot )
 
 void cSoundCore::StopSound(int ai_Slot)
 {
-	if(!this->mb_Dead)
+	if(!this->isActive)
 	{
 		this->StopAllSounds();
 		//stop sound from playing
@@ -105,7 +105,7 @@ void cSoundCore::StopSound(int ai_Slot)
 
 void cSoundCore::Shutdown()
 {
-	if(!this->mb_Dead)
+	if(!this->isActive)
 	{
 		//stop the performance
 		this->StopAllSounds();
@@ -123,7 +123,7 @@ void cSoundCore::Shutdown()
 		}
 
         Mix_Quit();
-		this->mb_Dead = true;
+		this->isActive = true;
 	}
 
 }
@@ -161,7 +161,7 @@ void cSoundCore::StopMusic() {
 
 void cSoundCore::UnloadMusic( int track )
 {
-	if(!mb_Dead)
+	if(!isActive)
 	{
 
 		if(!this->mp_Songs[track])

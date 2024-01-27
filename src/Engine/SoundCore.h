@@ -35,5 +35,5 @@ private:
 	Mix_Chunk* mp_Sounds[SOUND_SLOT_SIZE];
 	
 	Mix_Music* mp_Songs[MUSIC_SLOT_SIZE];
-	bool mb_Dead;  //If we've not initialized all sounds
+	bool isActive;  //If we've not initialized all sounds
 };
