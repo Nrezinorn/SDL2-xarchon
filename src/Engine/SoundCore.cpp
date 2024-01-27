@@ -4,51 +4,56 @@
 
 cSoundCore::cSoundCore()
 {
-  	mb_Dead = true;
+	// Define our object as not being active. Until we load sounds in successfully,
+	// or if we run Shutdown() and unload the sounds, this should be false.
+  	isActive = false;
+
   	// What's this...  // Zero out our memory, so there's no garbage data
 	memset(&mp_Sounds,0,SOUND_SLOT_SIZE*sizeof(long));
 	memset(&mp_Songs,0,MUSIC_SLOT_SIZE*sizeof(long));
+
+	// load libraries and other fun things
+	// TODO HANDLE LOGGING DIFFERENTLY
+	if (Mix_Init(MIX_INIT_MID) < 0) {
+	  std::cout << "Sound Init failed" << std::endl;
+	}
+
+	// load the audio device
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+
+	// init our object
+	this->Initialize();
 }
 
 cSoundCore::~cSoundCore()
 {
-	if(!this->mb_Dead)
-	{
+	// if the object has loaded resources, unload everything
+	if(this->isActive) {
 		Shutdown();
 	}
 }
 
 void cSoundCore::Initialize()
 {
-	//kill existing sound system
-	if(!this->mb_Dead)
+	// if this object is "alive", unload it.
+	if(this->isActive) {
 		Shutdown();
+	}
 	
-	if (Mix_Init(MIX_INIT_MID) < 0) 
-		std::cout << "Sound Init failed" << std::endl;
-
-	
-	// What's this...  It's supposed to init the memory for mp_Sounds, but doesn't seem to work?
+	// zeros out mp_Sounds array to the size we need
 	memset(&mp_Sounds,0,SOUND_SLOT_SIZE*sizeof(long));
 
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT, 2, 2048) < 0)
-		this->mb_Dead=true;
-
     //set as alive
-	this->mb_Dead = false;
-
+	this->isActive = true;
 }
 
-void cSoundCore::LoadSound( const char* a_FilePath, int a_Slot, bool a_Loop ) {
-
-  // Kludge to load a null sound, never use this
-  if (a_FilePath == NULL) { mp_Sounds[a_Slot] = 0; return; }
+void cSoundCore::LoadSound(const char* soundFilePath, int soundSlot, bool loopSound) {
 
   // Convert this string to a wide character array
   Mix_Chunk *pSound = NULL;
   Uint8 nVolume = 128;  //volume 100%
   
-  pSound = Mix_LoadWAV(a_FilePath);
+  pSound = Mix_LoadWAV(soundFilePath);
   //std::cout << "Attempted to load wav" << std::endl;
   // make sure we loaded sound
   //pSound->volume = nVolume;
@@ -61,13 +66,13 @@ void cSoundCore::LoadSound( const char* a_FilePath, int a_Slot, bool a_Loop ) {
   // place sound in slot
   //std::cout << "Sound in slot" << std::endl;
   pSound->volume = nVolume;
-  this->mp_Sounds[a_Slot] = pSound;
+  this->mp_Sounds[soundSlot] = pSound;
 
 }
 
 void cSoundCore::PlaySound(int a_SoundNumber, long a_Volume )
 {
-	if(!mb_Dead) {
+	if(!isActive) {
 		//play sound
 		Mix_PlayChannel(-1, this->mp_Sounds[a_SoundNumber],0);
 	}
@@ -75,7 +80,7 @@ void cSoundCore::PlaySound(int a_SoundNumber, long a_Volume )
 
 void cSoundCore::UnloadSound( int ai_Slot )
 {
-	if(!mb_Dead)
+	if(!isActive)
 	{
 
 		if(!this->mp_Sounds[ai_Slot])
@@ -93,7 +98,7 @@ void cSoundCore::UnloadSound( int ai_Slot )
 
 void cSoundCore::StopSound(int ai_Slot)
 {
-	if(!this->mb_Dead)
+	if(!this->isActive)
 	{
 		this->StopAllSounds();
 		//stop sound from playing
@@ -105,7 +110,7 @@ void cSoundCore::StopSound(int ai_Slot)
 
 void cSoundCore::Shutdown()
 {
-	if(!this->mb_Dead)
+	if(!this->isActive)
 	{
 		//stop the performance
 		this->StopAllSounds();
@@ -123,7 +128,7 @@ void cSoundCore::Shutdown()
 		}
 
         Mix_Quit();
-		this->mb_Dead = true;
+		this->isActive = true;
 	}
 
 }
@@ -133,13 +138,13 @@ void cSoundCore::StopAllSounds() {
   Mix_HaltChannel(-1);
 }
 
-void cSoundCore::LoadMusic(const char* a_FilePath, int track) {
+void cSoundCore::LoadMusic(const char* soundFilePath, int track) {
 
   // Kludge to load a null music, never use this
-  if (a_FilePath == NULL) { mp_Songs[track] = 0; return; }
+  if (soundFilePath == NULL) { mp_Songs[track] = 0; return; }
 
   Mix_Music* pMusic = NULL;
-  pMusic = Mix_LoadMUS(a_FilePath);
+  pMusic = Mix_LoadMUS(soundFilePath);
 
  if (pMusic == NULL) {
 	  std::cout << Mix_GetError() << std::endl;
@@ -161,7 +166,7 @@ void cSoundCore::StopMusic() {
 
 void cSoundCore::UnloadMusic( int track )
 {
-	if(!mb_Dead)
+	if(!isActive)
 	{
 
 		if(!this->mp_Songs[track])

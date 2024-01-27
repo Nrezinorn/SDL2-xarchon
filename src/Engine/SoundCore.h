@@ -20,9 +20,8 @@ public:
 
 	void Initialize();
 	void Shutdown();
-
-	void LoadSound(const char* a_FilePath, int a_Slot, bool a_Loop = false );
-	void PlaySound(int a_SoundNumber, long a_Volume = 1000 );
+	void LoadSound(const char* soundFilePath, int soundSlot, bool loopSound = false);
+	void PlaySound(int a_SoundNumber, long a_Volume = 1000); // sdl max: 128, dx max: 1000
 	void StopSound(int);
 	void LoadMusic(const char* a_FilePath, int track);
 	void PlayMusic(int track);
@@ -33,7 +32,6 @@ public:
 
 private:
 	Mix_Chunk* mp_Sounds[SOUND_SLOT_SIZE];
-	
 	Mix_Music* mp_Songs[MUSIC_SLOT_SIZE];
-	bool mb_Dead;  //If we've not initialized all sounds
+	bool isActive;  //If we've not initialized all sounds
 };
