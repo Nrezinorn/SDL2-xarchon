@@ -8,7 +8,7 @@
 #include <string>
 using std::string;
 
-#define SOUND_SLOT_SIZE 4  // we have 4 sounds
+#define SOUND_SLOT_SIZE 1  // we have 1 sound
 #define MUSIC_SLOT_SIZE 1  // we have 1 midi file
 //#undef PlaySound
 
