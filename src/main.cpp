@@ -10,6 +10,7 @@ int main(int argv, char** args){
 
     pSoundCore->Initialize();
     pSoundCore->LoadSound("data/Samples/oof.wav", 0);
+    pSoundCore->LoadMusic("data/Samples/flourish.mid",0);
 
     pSoundCore->PlaySound(0);
     SDL_Delay(1000);
