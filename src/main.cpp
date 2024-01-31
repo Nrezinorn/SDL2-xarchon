@@ -12,18 +12,14 @@ int main(int argv, char** args){
     Uint64 formerCounter = currentCounter;
     double accumulatedFixedUpdateTime = FixedUpdateRate;
 
-
-
     cSoundCore* pSoundCore;
     Game* g;
-    SDL_Init(SDL_INIT_VIDEO);
+    // SDL_Init(SDL_INIT_VIDEO);
 
     // pSoundCore = new cSoundCore();
-
     // pSoundCore->Initialize();
     // pSoundCore->LoadSound("data/Samples/oof.wav", 0);
     // pSoundCore->LoadMusic("data/Samples/flourish.mid",0);
-
     // pSoundCore->PlaySound(0);
     // SDL_Delay(1000);
     // pSoundCore->Shutdown();
@@ -36,8 +32,8 @@ int main(int argv, char** args){
 
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
-            case SDL_QUIT:              g->Halt();
-                break;
+            case SDL_QUIT:
+                g->Halt(); break;
             }
         }
         //SDL_RenderClear(g->GetRendererHandle());
@@ -46,7 +42,6 @@ int main(int argv, char** args){
         SDL_Delay(200); // give some time back
     }
     SDL_Quit();
-
 
     return 0;
 }
