@@ -46,7 +46,7 @@ endif
 #give up on object files in a folder of their own for now
 OBJDIR=obj
 
-src = $(wildcard src/*.cpp src/Engine/*.cpp)
+src = $(wildcard src/*.cpp src/Engine/*.cpp src/Game/*.cpp)
 obj = $(src:.cpp=.o)
 dep = $(obj:.o=.d)
 
