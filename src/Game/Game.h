@@ -4,18 +4,18 @@
 class Game {
 
 public:
-    Game::Game();
-    Game::~Game();
+    Game();
+    ~Game();
 
     // main game loop for now
-    void Game::Loop();
-    bool Game::IsRunning() { return bIsRunning; }  // expose private bool for main
-    void Game::Halt() { this->bIsRunning = false; }
+    void Loop();
+    bool IsRunning() { return bIsRunning; }  // expose private bool for main
+    void Halt() { this->bIsRunning = false; }
 
-    SDL_Renderer* Game::GetRendererHandle() { return this->pGFX->GetRenderer(); }
-    
+    SDL_Renderer* GetRendererHandle() { return this->pGFX->GetRenderer(); }
+
 private:
-    bool Game::InitRenderer();
+    bool InitRenderer();
     
     CGraphicsCore* pGFX;
     bool bIsRunning = false;

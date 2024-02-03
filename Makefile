@@ -38,7 +38,7 @@ ifeq ($(UNAME_S),Darwin)
 CXXFLAGS += -F/Library/Frameworks
 LDFLAGS= -framework cocoa
 # SDL2 Frameworks used on mac 1
-# LDFLAGS= -framework SDL2 -framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image -framework cocoa
+LDFLAGS= -framework SDL2 -framework SDL2_mixer -framework SDL2_image -framework cocoa -rpath /Library/Frameworks
 CMD_CLEAN = rm -f $(obj)
 endif
 endif
