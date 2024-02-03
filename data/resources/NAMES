@@ -1,0 +1,46 @@
+knight                  knight
+archer                  archer
+valkyrie                valkyrie
+golem                   golem
+unicorn                 unicorn
+djinni                  djinni
+phoenix                 phoenix
+wizard                  wizard
+
+knight_weapon           sword
+phoenix_weapon          fieryexplosion
+golem_weapon            boulder
+archer_weapon           arrow
+valkyrie_weapon         magicspear
+unicorn_weapon          energybolt
+djinni_weapon           whirlwind
+wizard_weapon           fireball
+
+goblin                  goblin
+manticore               manticore
+banshee                 banshee
+troll                   troll
+basilisk                basilisk
+dragon                  dragon
+shapeshifter            shapeshifter
+sorceress               sorceress
+
+goblin_weapon           club
+banshee_weapon          scream
+troll_weapon            boulder
+manticore_weapon        tailspikes
+basilisk_weapon         eyebeam
+dragon_weapon           fierybreath
+sorceress_weapon        lightningbolt
+
+air_elem                air-elemental
+earth_elem              earth-elemental
+fire_elem               fire-elemental
+water_elem              water-elemental
+
+air_elem_weapon         tornado
+earth_elem_weapon       boulder
+fire_elem_weapon        fierybolt
+water_elem_weapon       icebolt
+
+end
