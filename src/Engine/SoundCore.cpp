@@ -47,13 +47,13 @@ void cSoundCore::Initialize()
 	this->isActive = true;
 }
 
-void cSoundCore::LoadSound(const char* soundFilePath, int soundSlot, bool loopSound) {
+void cSoundCore::LoadSound(const std::string soundFilePath, int soundSlot, bool loopSound) {
 
   // Convert this string to a wide character array
   Mix_Chunk *pSound = NULL;
   Uint8 nVolume = 128;  //volume 100%
   
-  pSound = Mix_LoadWAV(soundFilePath);
+  pSound = Mix_LoadWAV(soundFilePath.c_str());
   //std::cout << "Attempted to load wav" << std::endl;
   // make sure we loaded sound
   //pSound->volume = nVolume;
