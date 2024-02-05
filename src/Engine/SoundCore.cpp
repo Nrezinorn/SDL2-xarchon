@@ -47,7 +47,7 @@ void cSoundCore::Initialize()
 	this->isActive = true;
 }
 
-void cSoundCore::LoadSound(const std::string soundFilePath, int soundSlot, bool loopSound) {
+void cSoundCore::LoadSound(const std::string& soundFilePath, int soundSlot, bool loopSound) {
 
   // Convert this string to a wide character array
   Mix_Chunk *pSound = NULL;

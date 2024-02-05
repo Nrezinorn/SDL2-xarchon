@@ -20,7 +20,7 @@ public:
 
 	void Initialize();
 	void Shutdown();
-	void LoadSound(const std::string soundFilePath, int soundSlot, bool loopSound = false);
+	void LoadSound(const std::string& soundFilePath, int soundSlot, bool loopSound = false);
 	void PlaySound(int a_SoundNumber, long a_Volume = 1000); // sdl max: 128, dx max: 1000
 	void StopSound(int);
 	void LoadMusic(const char* a_FilePath, int track);
