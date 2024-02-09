@@ -51,7 +51,7 @@ void cSoundCore::LoadSound(const std::string& soundFilePath, int soundSlot, bool
 
   // Check to make sure that our passed soundSlot is within bounds for our mp_Sounds array.
   if (soundSlot > SOUND_SLOT_SIZE) {
-	std::cout << "Called slot is out of bounds" << cout::endl;
+	std::cout << "Called slot is out of bounds" << std::endl;
 	return;
   }
 
