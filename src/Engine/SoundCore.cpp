@@ -2,8 +2,7 @@
 #include <iostream>
 #include <cstring>
 
-cSoundCore::cSoundCore()
-{
+cSoundCore::cSoundCore() {
 	// Define our object as not being active. Until we load sounds in successfully,
 	// or if we run Shutdown() and unload the sounds, this should be false.
   	isActive = false;
@@ -25,16 +24,14 @@ cSoundCore::cSoundCore()
 	this->Initialize();
 }
 
-cSoundCore::~cSoundCore()
-{
+cSoundCore::~cSoundCore() {
 	// if the object has loaded resources, unload everything
 	if(this->isActive) {
 		Shutdown();
 	}
 }
 
-void cSoundCore::Initialize()
-{
+void cSoundCore::Initialize() {
 	// if this object is "alive", unload it.
 	if(this->isActive) {
 		Shutdown();
@@ -75,16 +72,14 @@ void cSoundCore::LoadSound(const std::string& soundFilePath, int soundSlot, bool
   this->mp_Sounds[soundSlot] = pSound;
 }
 
-void cSoundCore::PlaySound(int slotNumber, long volume)
-{
+void cSoundCore::PlaySound(int slotNumber, long volume) {
 	if(!isActive) {
 		//play sound
 		Mix_PlayChannel(-1, this->mp_Sounds[slotNumber],0);
 	}
 }
 
-void cSoundCore::UnloadSound( int slotNumber )
-{
+void cSoundCore::UnloadSound(int slotNumber) {
 	if(isActive) {
 
 		if(!this->mp_Sounds[slotNumber]) {
@@ -98,8 +93,7 @@ void cSoundCore::UnloadSound( int slotNumber )
 	}
 }
 
-void cSoundCore::StopSound(int slotNumber)
-{
+void cSoundCore::StopSound(int slotNumber) {
 	if(this->isActive) {
 		this->StopAllSounds();
 		//stop sound from playing
@@ -108,8 +102,7 @@ void cSoundCore::StopSound(int slotNumber)
 	}
 }
 
-void cSoundCore::Shutdown()
-{
+void cSoundCore::Shutdown() {
 	if(!this->isActive) {
 		//stop the performance
 		this->StopAllSounds();
@@ -163,7 +156,7 @@ void cSoundCore::StopMusic() {
     }
 }
 
-void cSoundCore::UnloadMusic( int track ) {
+void cSoundCore::UnloadMusic(int track) {
     if(!isActive) {
 		if(!this->mp_Songs[track]) {
 			// Slot is already empty
