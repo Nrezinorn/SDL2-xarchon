@@ -49,6 +49,12 @@ void cSoundCore::Initialize()
 
 void cSoundCore::LoadSound(const std::string& soundFilePath, int soundSlot, bool loopSound) {
 
+  // Check to make sure that our passed soundSlot is within bounds for our mp_Sounds array.
+  if (soundSlot > SOUND_SLOT_SIZE) {
+	std::cout << "Called slot is out of bounds" << cout::endl;
+	return;
+  }
+
   // Convert this string to a wide character array
   Mix_Chunk *pSound = NULL;
   Uint8 nVolume = 128;  //volume 100%
