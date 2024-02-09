@@ -73,110 +73,99 @@ void cSoundCore::LoadSound(const std::string& soundFilePath, int soundSlot, bool
   //std::cout << "Sound in slot" << std::endl;
   pSound->volume = nVolume;
   this->mp_Sounds[soundSlot] = pSound;
-
 }
 
-void cSoundCore::PlaySound(int a_SoundNumber, long a_Volume )
+void cSoundCore::PlaySound(int slotNumber, long volume)
 {
 	if(!isActive) {
 		//play sound
-		Mix_PlayChannel(-1, this->mp_Sounds[a_SoundNumber],0);
+		Mix_PlayChannel(-1, this->mp_Sounds[slotNumber],0);
 	}
 }
 
-void cSoundCore::UnloadSound( int ai_Slot )
+void cSoundCore::UnloadSound( int slotNumber )
 {
-	if(!isActive)
-	{
+	if(isActive) {
 
-		if(!this->mp_Sounds[ai_Slot])
-		{
+		if(!this->mp_Sounds[slotNumber]) {
 			// Slot is already empty
 			return;
 		}
 
 		//unload sound
-		Mix_FreeChunk(mp_Sounds[ai_Slot]);
-		mp_Sounds[ai_Slot] = 0;
+		Mix_FreeChunk(mp_Sounds[slotNumber]);
+		mp_Sounds[slotNumber] = 0;
 	}
-
 }
 
-void cSoundCore::StopSound(int ai_Slot)
+void cSoundCore::StopSound(int slotNumber)
 {
-	if(!this->isActive)
-	{
+	if(this->isActive) {
 		this->StopAllSounds();
 		//stop sound from playing
 		//todo: figure out logic here to stop specific playing sound if currently played.
 		std::cout << "Unimplemented: StopSound()" << std::endl;
 	}
-
 }
 
 void cSoundCore::Shutdown()
 {
-	if(!this->isActive)
-	{
+	if(!this->isActive) {
 		//stop the performance
 		this->StopAllSounds();
 
 		//kill all sounds / mods
-		for(int i=0; i < SOUND_SLOT_SIZE; i++)
-		{
+		for(int i=0; i < SOUND_SLOT_SIZE; i++) {
 			UnloadSound(i);
 		}
 		// kill all music
 		this->StopMusic();
-			for(int i=0; i < MUSIC_SLOT_SIZE; i++)
-		{
+		for(int i=0; i < MUSIC_SLOT_SIZE; i++) {
 			UnloadMusic(i);
 		}
 
         Mix_Quit();
 		this->isActive = true;
 	}
-
 }
 
 void cSoundCore::StopAllSounds() {
-  // stop all sounds currently playing
-  Mix_HaltChannel(-1);
+    // stop all sounds currently playing
+    Mix_HaltChannel(-1);
 }
 
 void cSoundCore::LoadMusic(const char* soundFilePath, int track) {
 
-  // Kludge to load a null music, never use this
-  if (soundFilePath == NULL) { mp_Songs[track] = 0; return; }
+    // Kludge to load a null music, never use this
+	if (soundFilePath == NULL) {
+	    mp_Songs[track] = 0;
+	    return;
+    }
 
-  Mix_Music* pMusic = NULL;
-  pMusic = Mix_LoadMUS(soundFilePath);
+    Mix_Music* pMusic = NULL;
+    pMusic = Mix_LoadMUS(soundFilePath);
 
- if (pMusic == NULL) {
-	  std::cout << Mix_GetError() << std::endl;
-	  return;
-  }
+	if (pMusic == NULL) {
+	    std::cout << Mix_GetError() << std::endl;
+	    return;
+  	}
 
-  this->mp_Songs[track] = pMusic;
-
+    this->mp_Songs[track] = pMusic;
 }
 
 void cSoundCore::PlayMusic(int track) {
-  Mix_PlayMusic(this->mp_Songs[track], -1);
+    Mix_PlayMusic(this->mp_Songs[track], -1);
 }
 
 void cSoundCore::StopMusic() {
-	if(Mix_PlayingMusic())
-		Mix_HaltMusic();
+    if(Mix_PlayingMusic()) {
+        Mix_HaltMusic();
+    }
 }
 
-void cSoundCore::UnloadMusic( int track )
-{
-	if(!isActive)
-	{
-
-		if(!this->mp_Songs[track])
-		{
+void cSoundCore::UnloadMusic( int track ) {
+    if(!isActive) {
+		if(!this->mp_Songs[track]) {
 			// Slot is already empty
 			return;
 		}
@@ -185,5 +174,4 @@ void cSoundCore::UnloadMusic( int track )
 		Mix_FreeMusic(mp_Songs[track]);
 		mp_Songs[track] = 0;
 	}
-
 }
